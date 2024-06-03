@@ -37,26 +37,33 @@
 
         <table>
             <thead>
-                <th>Naam Leverancier</th>
-                <th>Contactpersoon</th>
-                <th>Productnaam</th>
-                <th>Totaal geleverd</th>
-                <th>Specificatie</th>
+                @if ($result == null)
+                @else
+                    <th>Naam Leverancier</th>
+                    <th>Contactpersoon</th>
+                    <th>Productnaam</th>
+                    <th>Totaal geleverd</th>
+                    <th>Specificatie</th>
+                @endif
             </thead>
             <tbody>
-                @foreach ($result as $product)
-                    <tr>
-                        <td>{{ $product->lNaam }}</td>
-                        <td>{{ $product->contactPersoon }}</td>
-                        <td>{{ $product->pNaam }}</td>
-                        <td>{{ $product->totaalGeleverd }}</td>
-                        <td>
-                            <a href="/leverancier/{{ $product->lId }}">
-                                <i class='fa-solid fa-question' style='color: #0000ff;'></i>
-                            </a>
-                        </td>
-                    </tr>
-                @endforeach
+                @if ($result == null)
+                    <h1>Er zijn <span>geen</span> leveringen geweest van <span>producten</span> in <span>deze periode</span></h1>
+                @else
+                    @foreach ($result as $product)
+                        <tr>
+                            <td>{{ $product->lNaam }}</td>
+                            <td>{{ $product->contactPersoon }}</td>
+                            <td>{{ $product->pNaam }}</td>
+                            <td>{{ $product->totaalGeleverd }}</td>
+                            <td>
+                                <a href="/leverancier/{{ $product->lId }}">
+                                    <i class='fa-solid fa-question' style='color: #0000ff;'></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
             </tbody>
         </table>
     </div>
