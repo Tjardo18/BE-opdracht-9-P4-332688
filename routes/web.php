@@ -9,6 +9,7 @@ use App\Http\Controllers\AllergeenController;
 use App\Http\Controllers\LeverancierController;
 use App\Http\Controllers\OverzichtLeverancierController;
 use App\Http\Controllers\NieuweLeveringController;
+use App\Http\Controllers\GeleverdeProductenController;
 use App\Models\ProductPerLeverancier;
 use PhpParser\Node\Expr\FuncCall;
 
@@ -37,3 +38,7 @@ Route::post('/leverancier-details', [LeverancierDetailsController::class, 'store
 Route::get('/allergeen-overzicht', [OverzichtAllergeenController::class, 'index',])->name('allergeen-overzicht.index');
 
 Route::get('/allergeen-overzicht/filter', [OverzichtAllergeenController::class, 'filterByAllergie'])->name('allergeen-overzicht.filterByAllergie');
+
+Route::get('/geleverde-producten', [GeleverdeProductenController::class, 'index',])->name('geleverde-producten.index');
+
+Route::get('/geleverde-producten/filter', [GeleverdeProductenController::class, 'filterByDateRange'])->name('geleverde-producten.filterByDateRange');
