@@ -31,7 +31,7 @@
                 <input type="date" id="filter_startDatum" name="filter_startDatum">
                 <label for="filter_eindDatum">Einddatum:</label>
                 <input type="date" id="filter_eindDatum" name="filter_eindDatum">
-                <input type="submit">
+                <input type="submit" value="Maak Selectie">
             </form>
         </div>
 
@@ -51,9 +51,9 @@
                         <td>{{ $product->pNaam }}</td>
                         <td>{{ $product->totaalGeleverd }}</td>
                         <td>
-                            {{-- <a href="/levering-details/{{ $product->lId }}"> --}}
-                            <i class='fa-solid fa-question' style='color: #0000ff;'></i>
-                            {{-- </a> --}}
+                            <a href="/leverancier/{{ $product->lId }}">
+                                <i class='fa-solid fa-question' style='color: #0000ff;'></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach
