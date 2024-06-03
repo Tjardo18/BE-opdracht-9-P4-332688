@@ -12,53 +12,53 @@
 
 <body>
 
-<div class="logo">
-    <a href="{{ url('/') }}">
-        <img src="{{ asset('img/logo-wit.png') }}">
-    </a>
-</div>
-
-<div class="card">
-    <div class="title">
-        <h1>
-            {{ $title }}
-        </h1>
+    <div class="logo">
+        <a href="{{ url('/') }}">
+            <img src="{{ asset('img/logo-wit.png') }}">
+        </a>
     </div>
-    <table>
-        <thead>
-        <th>Naam</th>
-        <th>Contactpersoon</th>
-        <th>Leveranciernummer</th>
-        <th>Mobiel</th>
-        <th>Aantal verschillende producten</th>
-        <th>Toon producten</th>
-        <th>Details</th>
-        </thead>
-        <tbody>
-        @foreach ($result as $leverancier)
-            <tr>
-                <td>{{$leverancier->Naam}}</td>
-                <td>{{$leverancier->ContactPersoon}}</td>
-                <td>{{$leverancier->LeverancierNummer}}</td>
-                <td>{{$leverancier->Mobiel}}</td>
-                <td>{{$leverancier->ProductCount}}</td>
-                <td>
-                    <a href='/leveringen/{{$leverancier->id}}'>
-                        <i class='bx bxs-package' style='color: #ff2287;'></i>
-                    </a>
-                </td>
-                <td>
-                    <a href='/leverancier-details/{{$leverancier->id}}'>
-                        <i class='bx bxs-edit' style='color: #ff2287;'></i>
-                    </a>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
-</div>
 
-<script src="{{ asset('js/column.js') }}"></script>
+    <div class="card">
+        <div class="title">
+            <h1>
+                {{ $title }}
+            </h1>
+        </div>
+        <table>
+            <thead>
+                <th>Naam</th>
+                <th>Contactpersoon</th>
+                <th>Leveranciernummer</th>
+                <th>Mobiel</th>
+                <th>Aantal verschillende producten</th>
+                <th>Toon producten</th>
+                <th>Details</th>
+            </thead>
+            <tbody>
+                @foreach ($result as $leverancier)
+                    <tr>
+                        <td>{{ $leverancier->Naam }}</td>
+                        <td>{{ $leverancier->ContactPersoon }}</td>
+                        <td>{{ $leverancier->LeverancierNummer }}</td>
+                        <td>{{ $leverancier->Mobiel }}</td>
+                        <td>{{ $leverancier->ProductCount }}</td>
+                        <td>
+                            <a href='/leveringen/{{ $leverancier->id }}'>
+                                <i class='bx bxs-package' style='color: #ff2287;'></i>
+                            </a>
+                        </td>
+                        <td>
+                            <a href='/leverancier-details/{{ $leverancier->id }}'>
+                                <i class='bx bxs-edit' style='color: #ff2287;'></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{{ asset('js/column.js') }}"></script>
 
 </body>
 
