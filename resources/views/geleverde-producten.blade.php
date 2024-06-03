@@ -48,7 +48,8 @@
             </thead>
             <tbody>
                 @if ($result == null)
-                    <h1>Er zijn <span>geen</span> leveringen geweest van <span>producten</span> in <span>deze periode</span></h1>
+                    <h1>Er zijn <span>geen</span> leveringen geweest van <span>producten</span> in <span>deze
+                            periode</span></h1>
                 @else
                     @foreach ($result as $product)
                         <tr>
