@@ -234,6 +234,7 @@ return new class extends Migration
         DB::unprepared("CREATE PROCEDURE getGeleverdeProducten()
                     BEGIN
                         SELECT 
+                            l.id AS lId,
                             l.naam AS lNaam,
                             l.contactPersoon AS contactPersoon,
                             p.naam AS pNaam,
@@ -245,7 +246,7 @@ return new class extends Migration
                         JOIN 
                             product p ON ppl.productId = p.id
                         GROUP BY 
-                            l.naam, l.contactPersoon, p.naam
+                            l.id, l.naam, l.contactPersoon, p.naam
                         ORDER BY
                             l.naam ASC;
                     END");
@@ -253,6 +254,7 @@ return new class extends Migration
         DB::unprepared("CREATE PROCEDURE getGeleverdeProductenByDateRange(IN startDate DATE, IN endDate DATE)
                     BEGIN
                         SELECT 
+                            l.id AS lId,
                             l.naam AS lNaam,
                             l.contactPersoon AS contactPersoon,
                             p.naam AS pNaam,
@@ -266,7 +268,7 @@ return new class extends Migration
                         WHERE 
                             ppl.datumLevering BETWEEN startDate AND endDate
                         GROUP BY 
-                            l.naam, l.contactPersoon, p.naam;
+                            l.id, l.naam, l.contactPersoon, p.naam;
                     END");
     }
 
