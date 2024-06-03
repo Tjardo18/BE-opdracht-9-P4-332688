@@ -33,6 +33,11 @@
         <h1 style="cursor: pointer">Allergenen Overzicht</h1>
     </a>
 </div>
+<div class="title">
+    <a href="/geleverde-producten">
+        <h1 style="cursor: pointer">Geleverde Producten</h1>
+    </a>
+</div>
 
 <script>
     // window.location.href = '/overzicht';
