@@ -5,7 +5,8 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -229,6 +230,44 @@ return new class extends Migration {
                         ORDER BY
                             p.naam ASC;
                     END");
+        DB::select("DROP PROCEDURE IF EXISTS getGeleverdeProducten");
+        DB::unprepared("CREATE PROCEDURE getGeleverdeProducten()
+                    BEGIN
+                        SELECT 
+                            l.naam AS lNaam,
+                            l.contactPersoon AS contactPersoon,
+                            p.naam AS pNaam,
+                            SUM(ppl.aantal) AS totaalGeleverd
+                        FROM 
+                            leverancier l
+                        JOIN 
+                            productperleverancier ppl ON l.id = ppl.leverancierId
+                        JOIN 
+                            product p ON ppl.productId = p.id
+                        GROUP BY 
+                            l.naam, l.contactPersoon, p.naam
+                        ORDER BY
+                            l.naam ASC;
+                    END");
+        DB::select("DROP PROCEDURE IF EXISTS getGeleverdeProductenByDateRange");
+        DB::unprepared("CREATE PROCEDURE getGeleverdeProductenByDateRange(IN startDate DATE, IN endDate DATE)
+                    BEGIN
+                        SELECT 
+                            l.naam AS lNaam,
+                            l.contactPersoon AS contactPersoon,
+                            p.naam AS pNaam,
+                            SUM(ppl.aantal) AS totaalGeleverd
+                        FROM 
+                            leverancier l
+                        JOIN 
+                            productperleverancier ppl ON l.id = ppl.leverancierId
+                        JOIN 
+                            product p ON ppl.productId = p.id
+                        WHERE 
+                            ppl.datumLevering BETWEEN startDate AND endDate
+                        GROUP BY 
+                            l.naam, l.contactPersoon, p.naam;
+                    END");
     }
 
     /**
@@ -247,5 +286,7 @@ return new class extends Migration {
         DB::unprepared("DROP PROCEDURE IF EXISTS getLeverancierInfo");
         DB::unprepared("DROP PROCEDURE IF EXISTS getProductAllergenenInfo");
         DB::unprepared("DROP PROCEDURE IF EXISTS getProductAllergenenInfoByAllergen");
+        DB::unprepared("DROP PROCEDURE IF EXISTS getGeleverdeProducten");
+        DB::unprepared("DROP PROCEDURE IF EXISTS getGeleverdeProductenByDateRange");
     }
 };
